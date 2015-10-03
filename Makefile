@@ -8,7 +8,7 @@ PROGRAMMER = -F -c usbtiny
 OBJECTS    = main.o
 FUSES 	   =  -U lfuse:w:0x64:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
 
-#basically need more slowness for slower clocks, if it it cannot recogn device, probably needs to be slower...
+#basically need more slowness for slower clocks, if it cannot recogn device, probably needs to be slower...
 SLOWNESS = -B 2048
 
 
