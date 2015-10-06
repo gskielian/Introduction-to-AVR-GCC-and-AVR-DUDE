@@ -1,3 +1,4 @@
+#define F_CPU 16000UL
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -36,7 +37,7 @@ int main(void) {
   
   while (1) {
     if (flag) {
-	    _delay_ms(100); //keeps light on and debounces
+	    _delay_ms(1000); //keeps light on and debounces
 	    flag = 0; //resets flag
 	    PORTB &= (0 << PB3); //turns light back off
     }
