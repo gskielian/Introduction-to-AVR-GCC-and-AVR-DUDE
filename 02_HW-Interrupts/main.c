@@ -7,16 +7,19 @@ volatile uint8_t flag = 0;
 int main(void) {
 
   /////////////
-  //Pin setup//
+  //led setup//
   /////////////
 
   //data direction bit, setting PB3 to output
   DDRB = (1 << PB3);
-  PORTB |= (1 << PB2);
+
 
   ////////////////////
   //Interrupt stuff //
   ////////////////////
+  
+  //setting hardware interrupt to normally high
+  PORTB |= (1 << PB2);
   
   //falling edge of INT 0 generates an interrupt request
   MCUCR |= (1 << ISC01) | (0 << ISC00);
