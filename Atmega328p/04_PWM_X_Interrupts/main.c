@@ -55,19 +55,20 @@ void pwm_init() {
 }
 
 void interrupt_init() {
-  //setting hardware interrupt to normally high
-  PORTB |= (1 << PB2);
-  
-  //falling edge of INT 0 generates an interrupt request
-  MCUCR |= (1 << ISC01) | (0 << ISC00);
+	//setting hardware interrupt to normally high
+	PORTD |= (1 << PD2);
 
-  //listening for changes on INT0
-  GIMSK |= (1 << INT0);
+	//falling edge of INT 0 generates an interrupt request
+	EICRA |= (1 << ISC01) | (0 << ISC00);
 
-  //set global interrupts
-  sei();
+	//listening for changes on INT0
+	EIMSK |= (1 << INT0);
+
+	//turn on interrupts
+	sei();
 }
 
 ISR(INT0_vect) {
-	flag = !flag;
+	PORTB |= (1 << PB3); // turns light on
+	flag = 1; // sets flag, we keep delays outside of the interrupt
 }
