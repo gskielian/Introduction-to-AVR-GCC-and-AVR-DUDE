@@ -3,7 +3,7 @@
 #Caveat: if at first uploading fails, try try again... (as is in the way of mcu's)
 
 DEVICE     = atmega328p
-CLOCK      = 8000000
+CLOCK      = 1000000
 PROGRAMMER = -F -c usbtiny
 OBJECTS    = main.o
 # FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
@@ -11,7 +11,7 @@ OBJECTS    = main.o
 FUSES        = -U lfuse:w:0x7d:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
 
 #basically need more slowness for slower clocks, if it it cannot recogn device, probably needs to be slower...
-SLOWNESS = -B 2048 
+SLOWNESS = -B 1024 
 
 
 ## adding slowness in order to program for slower clocks 

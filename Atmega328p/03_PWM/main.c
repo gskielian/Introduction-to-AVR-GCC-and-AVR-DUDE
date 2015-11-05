@@ -20,6 +20,7 @@ int main(void) {
 
 void pwm_init() {
 	//turn PB1 into an output
+	//just for note, this __is__ the OCR1A pin
 	DDRB = (1 << DDB1);
 
 	//fast pwm mode

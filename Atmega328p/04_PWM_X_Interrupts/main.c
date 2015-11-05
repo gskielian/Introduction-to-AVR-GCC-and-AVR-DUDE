@@ -19,39 +19,19 @@ int main(void) {
 	while (1) {
 		for (i = 0; i < 256; i++){ 
 			if (flag) continue;
-			OCR1B = i; 
+			OCR1A = i; 
 			_delay_ms(100);
 		}
 	}
 }
 
 void pwm_init() {
-	/**
-	 * inverse of the PWM is on PB3
-	 * and basically have 2 pwm's from OCR1B
-	 * we can keep either in input mode to prevent actuation
-	 */
-
-	//ddr for pwm pin (inverted)
-	//DDRB = (1 << DDB3);
-
-	//ddr for pwm pin (non-inverted)
-	DDRB |= (1 << DDB4);
+	//turn PB1 into an output
+	DDRB = (1 << DDB1);
 
 	//fast pwm mode
-	TCCR0A |= (1<<WGM01) | (1<<WGM00);
-
-	//no prescaling
-	TCCR0B = 1<<CS00;
-
-	//set the clock, again for no pre-scaler
-	TCCR1 =  1<<CS10;
-
-	//allow PWM on 1B
-	GTCCR  = (1 << PWM1B);
-
-	//set compare bits
-	GTCCR |= (0 << COM1B1) | (1 << COM1B0);
+	TCCR1A |= (1 << COM1A1) | (1 << WGM10);
+	TCCR1B |= (1 << CS10) | (1 << WGM12);
 }
 
 void interrupt_init() {
@@ -69,6 +49,6 @@ void interrupt_init() {
 }
 
 ISR(INT0_vect) {
-	PORTB |= (1 << PB3); // turns light on
+	OCR1A = 0x00;
 	flag = 1; // sets flag, we keep delays outside of the interrupt
 }
