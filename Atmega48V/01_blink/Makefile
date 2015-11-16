@@ -2,16 +2,14 @@
 #I have been using this successfully with the "avr pocket programmer"
 #Caveat: if at first uploading fails, try try again... (as is in the way of mcu's)
 
-DEVICE     = atmega328p
-CLOCK      = 1000000
+DEVICE     = atmega48
+CLOCK      = 128000
 PROGRAMMER = -F -c usbtiny
 OBJECTS    = main.o
-FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
-# FUSES      = -U lfuse:w:0x7f:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
-# FUSES        = -U lfuse:w:0x7d:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
+FUSES 	   =  -U lfuse:w:0xe3:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
 
 #basically need more slowness for slower clocks, if it it cannot recogn device, probably needs to be slower...
-SLOWNESS = -B 1024 
+SLOWNESS = -B 4096
 
 
 ## adding slowness in order to program for slower clocks 
